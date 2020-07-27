@@ -3,33 +3,41 @@ import MainStuff.Graph.Graph;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         int n = scan.nextInt(), m = scan.nextInt(), s = scan.nextInt(), t = scan.nextInt(),
                 min = scan.nextInt(), max = scan.nextInt(), d = scan.nextInt();
-
-        //init graph
-        ArrayList<ArrayList<EdgeDest>> tmpEdges = new ArrayList<>(Collections.nCopies(n+1, new ArrayList()));
+        int[] edgeArray = new int[3*m]; //code , frst, scnd
         for (int i = 0; i < m; i++) {
-            int code = scan.nextInt(), frst = scan.nextInt(), scnd = scan.nextInt();
-            tmpEdges.get(frst).add(new EdgeDest(code, scnd));
+            for (int j = 0; j < 3; j++) {
+                int tmp = scan.nextInt();
+                edgeArray[i+j] = tmp;
+            }
         }
-        Graph graph = new Graph(n, m, (d == 1), tmpEdges);
+        Graph graph = new Graph(n,m,(d==1), makeEdgeList(edgeArray, n));
 
-        //find paths
-        ArrayList<ArrayList<Integer>> res = graph.findAllPaths(s,t,min,max);
-        int size = -1;
-        Optional op = res.stream().map(ArrayList::size).reduce((a, b) -> a+b);
-        if(op.isPresent()) size = (Integer) op.get();
-        System.out.println(size);
-        for (ArrayList<Integer> l:res) {
-            for (int i:l)
-                System.out.print(i + " ");
-            System.out.println();
-        }
+        ArrayList<Integer> res = graph.findAllPaths(s,t,min,max);
+        System.out.println(printRes(res));
+
+    }
+
+    public static String printRes(ArrayList<Integer> list) {
+        list = list.stream().distinct().sorted().collect(Collectors.toCollection(ArrayList::new));
+        System.out.println(list.size());
+        StringBuilder res = new StringBuilder();
+        for (int i : list)
+            res.append(i).append(" ");
+        return res.toString();
+    }
+
+    public static ArrayList<ArrayList<EdgeDest>> makeEdgeList(int[] rawArray, int n) {
+        ArrayList<ArrayList<EdgeDest>> edgeList = new ArrayList<>(Collections.nCopies( n+1, new ArrayList()));
+        for (int i = 0; i < rawArray.length; i+=3)
+            edgeList.get(rawArray[i+1]).add(new EdgeDest(rawArray[i],rawArray[i+2]));
+        return edgeList;
     }
 }

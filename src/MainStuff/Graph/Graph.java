@@ -25,7 +25,7 @@ public class Graph {
         allPaths = new AllPaths_bareDFS(this);
     }
 
-    public ArrayList<ArrayList<Integer>> findAllPaths(int strt, int end, int min, int max){
+    public ArrayList<Integer> findAllPaths(int strt, int end, int min, int max) {
         return allPaths.find(strt, end, min, max);
     }
 }

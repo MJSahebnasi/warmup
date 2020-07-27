@@ -11,5 +11,5 @@ public abstract class AllPaths {
         this.g = g;
     }
 
-    public abstract ArrayList<ArrayList<Integer>> find(int strt, int end, int min, int max);
+    public abstract ArrayList<Integer> find(int strt, int end, int min, int max);
 }

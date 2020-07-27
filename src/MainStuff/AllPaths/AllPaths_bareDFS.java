@@ -10,7 +10,7 @@ public class AllPaths_bareDFS extends AllPaths {
     }
 
     @Override
-    public ArrayList<ArrayList<Integer>> find(int strt, int end, int min, int max) {
+    public ArrayList<Integer> find(int strt, int end, int min, int max) {
         //TODO
         return null;
     }
