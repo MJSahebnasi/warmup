@@ -30,6 +30,7 @@ public class Main {
         list = list.stream().distinct().sorted().collect(Collectors.toCollection(ArrayList::new));
         System.out.println(list.size());
         StringBuilder res = new StringBuilder();
+
         for (int i : list)
             res.append(i).append(" ");
 
