@@ -25,12 +25,15 @@ public class Main {
 
     }
 
+
     public static String printRes(ArrayList<Integer> list) {
         list = list.stream().distinct().sorted().collect(Collectors.toCollection(ArrayList::new));
         System.out.println(list.size());
         StringBuilder res = new StringBuilder();
+
         for (int i : list)
             res.append(i).append(" ");
+
         return res.toString();
     }
 
