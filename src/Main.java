@@ -25,6 +25,7 @@ public class Main {
 
     }
 
+
     public static String printRes(ArrayList<Integer> list) {
         list = list.stream().distinct().sorted().collect(Collectors.toCollection(ArrayList::new));
         System.out.println(list.size());
