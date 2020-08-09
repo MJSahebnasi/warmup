@@ -32,6 +32,7 @@ public class Main {
         StringBuilder res = new StringBuilder();
         for (int i : list)
             res.append(i).append(" ");
+
         return res.toString();
     }
 
